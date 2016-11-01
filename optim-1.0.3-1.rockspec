@@ -9,7 +9,7 @@ source = {
 description = {
    summary = "An optimization library for Torch.",
    detailed = [[
-This package contains several optimization routines for Torch.   
+This package contains several optimization routines for Torch.
   ]],
    homepage = "https://github.com/torch/optim",
    license = "BSD"
@@ -21,12 +21,10 @@ dependencies = {
 }
 
 build = {
-   type = "command",
-   build_command = [[
-cmake -E make_directory build;
-cd build;
-cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(LUA_BINDIR)/.." -DCMAKE_INSTALL_PREFIX="$(PREFIX)"; 
-$(MAKE)
-   ]],
-   install_command = "cd build && $(MAKE) install"
+   type = "cmake",
+   variables = {
+      CMAKE_BUILD_TYPE="Release",
+      CMAKE_PREFIX_PATH="$(LUA_BINDIR)/..",
+      CMAKE_INSTALL_PREFIX="$(PREFIX)"
+   }
 }

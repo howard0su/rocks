@@ -15,13 +15,12 @@ description = {
 }
 
 dependencies = {'torch >= 7.0', 'cephes'}
+
 build = {
-   type = "command",
-   build_command = [[
-cmake -E make_directory build;
-cd build;
-cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(LUA_BINDIR)/.." -DCMAKE_INSTALL_PREFIX="$(PREFIX)";
-$(MAKE)
-   ]],
-   install_command = "cd build && $(MAKE) install"
+   type = "cmake",
+   variables = {
+      CMAKE_BUILD_TYPE="Release",
+      CMAKE_PREFIX_PATH="$(LUA_BINDIR)/..",
+      CMAKE_INSTALL_PREFIX="$(PREFIX)"
+   }
 }

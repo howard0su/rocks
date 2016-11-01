@@ -18,9 +18,17 @@ dependencies = {
 }
 
 build = {
-   type = "command",
-   build_command = [[
-cmake -E make_directory build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DLUA=$(LUA) -DLUA_BINDIR="$(LUA_BINDIR)" -DLUA_INCDIR="$(LUA_INCDIR)" -DLUA_LIBDIR="$(LUA_LIBDIR)" -DLUADIR="$(LUADIR)" -DLIBDIR="$(LIBDIR)" -DCONFDIR="$(CONFDIR)" && $(MAKE)
-]],
-   install_command = "cd build && $(MAKE) install"
+   type = "cmake",
+   variables = {
+      LUA="$(LUA)",
+      LUALIB="$(LUALIB)",
+      LUA_BINDIR="$(LUA_BINDIR)",
+      LUA_INCDIR="$(LUA_INCDIR)",
+      LUA_LIBDIR="$(LUA_LIBDIR)",
+      LUADIR="$(LUADIR)",
+      LIBDIR="$(LIBDIR)",
+      CMAKE_BUILD_TYPE="Release",
+      CMAKE_PREFIX_PATH="$(LUA_BINDIR)/..",
+      CMAKE_INSTALL_PREFIX="$(PREFIX)"
+   }
 }

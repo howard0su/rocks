@@ -8,7 +8,7 @@ source = {
 description = {
    summary = "Torch7 bindings for cuda-convnet2 kernels!",
    detailed = [[
-   All cuda-convnet2 modules exposed as nn.Module derivatives so 
+   All cuda-convnet2 modules exposed as nn.Module derivatives so
    that they can be used with torch's neural network package
    ]],
    homepage = "https://github.com/soumith/cuda-convnet2.torch",
@@ -22,9 +22,10 @@ dependencies = {
 }
 
 build = {
-   type = "command",
-   build_command = [[
-cmake -E make_directory build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(LUA_BINDIR)/.." -DCMAKE_INSTALL_PREFIX="$(PREFIX)" && $(MAKE)
-]],
-   install_command = "cd build && $(MAKE) install"
+   type = "cmake",
+   variables = {
+      CMAKE_BUILD_TYPE="Release",
+      CMAKE_PREFIX_PATH="$(LUA_BINDIR)/..",
+      CMAKE_INSTALL_PREFIX="$(PREFIX)"
+   }
 }

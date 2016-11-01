@@ -11,7 +11,7 @@ description = {
    detailed = [[
 With an emphasis on flexibility through the elegant use of object-oriented design patterns,
 dp is a deep learning library inspired by pylearn2
-designed for streamlining research and development using the Torch7 distribution. 
+designed for streamlining research and development using the Torch7 distribution.
 ]],
    homepage = "https://github.com/nicholas-leonard/dp/blob/master/README.md"
 }
@@ -31,9 +31,10 @@ dependencies = {
 
 
 build = {
-   type = "command",
-   build_command = [[
-cmake -E make_directory build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$(LUA_BINDIR)/.." -DCMAKE_INSTALL_PREFIX="$(PREFIX)" && $(MAKE)
-   ]],
-   install_command = "cd build && $(MAKE) install"
+   type = "cmake",
+   variables = {
+      CMAKE_BUILD_TYPE="Release",
+      CMAKE_PREFIX_PATH="$(LUA_BINDIR)/..",
+      CMAKE_INSTALL_PREFIX="$(PREFIX)"
+   }
 }
